@@ -4,9 +4,9 @@ const db = require("../models");
 // dotenv.config();
 
 
-const createTest = async (req, res) => {
+const createform = async (req, res) => {
   try {
-    let { name, email,phone_number } = req.body;
+    let { name, email,phone_number,company,services,message } = req.body;
  
     // 1️⃣ Validation
     // if (!branch_name || !entity_id) {
@@ -18,27 +18,27 @@ const createTest = async (req, res) => {
  
     
     // 4️⃣ Create branch
-    const newtest = await db.test.create({
-      name, email,phone_number
+    const newtest = await db.form.create({
+      name, email,phone_number,company,services,message
     });
  
     return res.status(201).json({
       success: true,
-      message: "Branch created successfully",
+      message: "form created successfully",
       data: newtest,
     });
   } catch (error) {
-    console.error("createBranch error:", error);
- 
+    console.error("createForm error:", error);
+  }
     return res.status(500).json({
       success: false,
-      message: "Error in creating branch",
+      message: "Error in creating form",
     });
   }
-};
+
  
  
 
 module.exports = {
-  createTest,
+  createform,
 };
