@@ -1,7 +1,6 @@
 // models/testdb.js
-
-module.exports = (sequelize, DataTypes) => {
-
+const {DataTypes} = require('sequelize');
+const sequelize = require('../config/db.config');
   const test = sequelize.define(
     "test",
     {
@@ -28,6 +27,12 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: true,
     }
   );
-
-  return test;
-};
+  (async () => {
+  try {
+    await sequelize.authenticate();
+    console.log("All models were synchronized successfully.");
+  } catch (error) {
+    console.error("Error synchronizing models:", error);
+  }
+})();
+  module.exports = test;
