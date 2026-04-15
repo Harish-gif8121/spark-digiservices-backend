@@ -6,6 +6,7 @@ const db = {};
 db.sequelize = sequelize;
 
 db.test = require('./testdb')(sequelize, DataTypes);
+db.form = require('./form')(sequelize, DataTypes);
 
 db.sequelize.sync({ alter: true })
   .then(() => {

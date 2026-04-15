@@ -1,7 +1,7 @@
 const express = require('express');
  
 const app = express();
-
+require("./models"); 
 const PORT = 3000;
  
 app.get('/', (req, res) => {
@@ -16,6 +16,10 @@ app.use(express.json());
 const testRoutes = require("./routes/test");
 app.use("/test", testRoutes);
  
+const formRoutes = require("./routes/form");
+app.use("/spark",formRoutes);
+
+
 app.listen(PORT, () => {
 
   console.log(`Server running on http://localhost:${PORT}`);
