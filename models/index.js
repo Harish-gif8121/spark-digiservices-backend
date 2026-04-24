@@ -5,15 +5,15 @@ const db = {};
 
 db.sequelize = sequelize;
 
-db.test = require('./testdb')(sequelize, DataTypes);
+// ONLY THIS
 db.form = require('./form')(sequelize, DataTypes);
 
 db.sequelize.sync({ alter: true })
   .then(() => {
-    console.log("All models were synchronized successfully.");
+    console.log("DB synced");
   })
-  .catch((error) => {
-    console.error("Error synchronizing models:", error);
+  .catch((err) => {
+    console.error("Sync error:", err);
   });
 
 module.exports = db;

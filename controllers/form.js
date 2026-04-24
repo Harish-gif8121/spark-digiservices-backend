@@ -1,44 +1,56 @@
-const { Sequelize } = require("sequelize");
 const db = require("../models");    
-// const dotenv = require("dotenv");
-// dotenv.config();
 
-
+// CREATE
 const createform = async (req, res) => {
   try {
-    let { name, email,phone_number,company,services,message } = req.body;
- 
-    // 1️⃣ Validation
-    // if (!branch_name || !entity_id) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: "Branch name and entity_id are required",
-    //   });
-    // }
- 
-    
-    // 4️⃣ Create branch
-    const newtest = await db.form.create({
-      name, email,phone_number,company,services,message
+    const { name, email, phone_number, company, services, message,source } = req.body;
+
+    const newForm = await db.form.create({
+      name,
+      email,
+      phone_number,
+      company,
+      services,
+      message,
+      source
     });
- 
+
     return res.status(201).json({
       success: true,
-      message: "form created successfully",
-      data: newtest,
+      message: "Form created successfully",
+      data: newForm,
     });
+
   } catch (error) {
     console.error("createForm error:", error);
-  }
     return res.status(500).json({
       success: false,
-      message: "Error in creating form",
+      message: "Error creating form",
     });
   }
+};
 
- 
- 
+// GET ALL
+const getAllForms = async (req, res) => {
+  try {
+    const forms = await db.form.findAll();
 
+    return res.status(200).json({
+      success: true,
+      data: forms,
+    });
+
+  } catch (error) {
+    console.error("getAllForms error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Error fetching forms",
+    });
+  }
+};
+
+// ✅ EXPORT BOTH
 module.exports = {
   createform,
+  getAllForms,
 };
