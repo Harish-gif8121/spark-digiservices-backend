@@ -18,6 +18,7 @@ app.get('/', (req, res) => {
 });
 
 app.use("/spark", require("./routes/form"));
+app.use('/validate',require('./routes/login'),)
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

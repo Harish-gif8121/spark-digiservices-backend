@@ -7,8 +7,9 @@ db.sequelize = sequelize;
 
 // ONLY THIS
 db.form = require('./form')(sequelize, DataTypes);
+db.userAuth = require('./userAuth')(sequelize, DataTypes);
 
-db.sequelize.sync({ alter: true })
+db.sequelize.sync({ })
   .then(() => {
     console.log("DB synced");
   })
